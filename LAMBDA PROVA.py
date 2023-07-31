@@ -1,22 +1,3 @@
-# import time 
-
-# durata = float(input('inserisci il tempo in secondi: '))
-# print(f'hai inserito {durata} secondi')
-# print('')
-
-# def cronometro():
-#     global durata
-    
-#     while durata > 0:
-#         print(f'{durata} secondi rimanenti')
-#         durata -= 1
-#         time.sleep(1)
-#         if durata == 0:
-#             print('tempo scaduto')
-#             break
-# cronometro()
-# print('')
-
 
 dati = lambda x: x**2                  #esempio con la funzione lambda
 print(f'la funzione lambda da come risultato {dati(3)}')
