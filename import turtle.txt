@@ -1,0 +1,16 @@
+import turtle 
+
+#inizializzazione della finestra
+turtle.setup(400,400)
+
+#creazioone della tartaruga
+tartaruga = turtle.Turtle()
+
+#disegno quadrato
+for _ in range(4):
+    tartaruga.forward(100)
+    tartaruga.left(90)
+    
+turtle.exitonclick()
+
+
