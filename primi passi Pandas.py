@@ -11,14 +11,14 @@ print(serie)
 #data,prodoto,quantita,prezzo unitario
 
 
-vendite = {'Data':['2023-01-02','2023-01-02','2023-01-03,''2023-01-03','2023-01-04'],
+data = {'Data':['2023-01-02','2023-01-02','2023-01-03,''2023-01-03','2023-01-04'],
                        'prodotto':['penna','matita','penna','matita','penna'],
                        'quantita':[10,20,15,5,10],
-                       'prezzo unitario':[1.2,0.8,1.2,0.8,1.2]}
-vendite = pd.DataFrame(vendite)
+                       'prezzo_unitario':[1.2,0.8,1.2,0.8,1.2]}
+vendite = pd.DataFrame(data)
 
 #fatturato totale per prodotto:
-vendite['fatturato'] = vendite['quantita'] * vendite['prezzo unitario'] #creo una nuova colonna fatturato
+vendite['fatturato'] = vendite['quantita'] * vendite['prezzo_unitario'] #creo una nuova colonna fatturato
 fatturato_prodotto = vendite.groupby('prodotto')['fatturato'].sum() #raggruppo per prodotto e sommo il fatturato
 print(f'fatturato totale per prodotto:\n, {fatturato_prodotto}\n')
 
@@ -28,3 +28,5 @@ print(f'prodotto piu\' venduto:\n, {prodoto_piu_venduto}\n')
 
 # creaiamo uno nuvo dataframe con le vendite mensili:
 vendite['Data'] = pd.to_datetime(vendite['Data']) #trasformo la colonna data in formato datetime
+fatturato_mensile = vendite.groupby(vendite['Data'].dt.to_period('M'))['fatturato'].sum() #raggruppo per mese e sommo il fatturato con il metodo dt.to_period('M')
+print(f'fatturato mensile:\n, {fatturato_mensile}\n')
