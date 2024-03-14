@@ -11,7 +11,6 @@ from scipy import integrate
 
 
 
-
 # OTTIMAZZIONE
 'result = minimize(funzione_da_ottimizzare,valori iniziali)'
 def objective(x):
@@ -25,7 +24,7 @@ print("")
 
 
 # INTEGRAZIONE
-'integral, errore = quad(funzione_da_integrare,limite_inferiore,limite_max)'
+'integral, errore = intergrate.quad(funzione_da_integrare,limite_inferiore,limite_max)'
 def f(x):
     return x ** 2
 # Calcola l'integrale definito di f da 0 a 1
