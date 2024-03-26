@@ -50,6 +50,59 @@ if result.alive:  #alive = controlla se il cursore è aperto
 else:
     print('nessun risultato trovato')
     
-db.close()
 
-# e possibile usarr le query e le aggregazioni per trovare i dati che soddisfano i criteri specificati
+
+
+pipeline = [
+    # Fase 1: Filtra i documenti che soddisfano una condizione
+    {"$match": {"age": {"$gt": 18}}},
+
+    # Fase 2: Raggruppa i documenti in base ad uno o più campi
+    {"$group": {"_id": "$surname", "count": {"$sum": 1}}},
+
+    # Fase 3: Ordina i risultati in base al conteggio in ordine discendente
+    {"$sort": {"count": -1}}
+]
+
+result = collection.aggregate(pipeline)
+
+for doc in result:
+    print(doc)
+
+'''Nell'esempio sopra, la pipeline di aggregazione è definita come una lista di dizionari in pipeline. 
+Ogni dizionario rappresenta una fase dell'aggregazione.
+
+
+Nel nostro esempio:
+
+La fase 1 ($match) filtra i documenti che hanno un campo "age" con un valore maggiore di 18.
+
+La fase 2 ($group) raggruppa i documenti in base al campo "surname" e calcola il conteggio di documenti per ciascun valore di "surname".
+
+La fase 3 ($sort) ordina i risultati in base al conteggio in ordine discendente.
+
+
+Infine, il metodo aggregate() viene chiamato sulla collezione specificata collection e 
+viene restituito un cursore che può essere iterato per recuperare i risultati delle operazioni di aggregazione'''
+
+pi = [{'$group':{'_id': None,'avg_age':{'$avg':'$age'}}},
+      {'$match':{'avg_age':{'$gt':25}}},
+      {'$sort':{'avg_age':1}},
+      {'$limit':1}]
+result = collection.aggregate(pi)
+for doc in result:
+    print(doc)
+db.close() #chiusura della connessione
+
+
+'''($$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$)
+1-il segno del dollaro($) serve per far riferimento anche ai campi del documento stesso,
+ad esempio per fare riferimento al campo "age" di un documento, possiamo usare "$age"
+
+2-nelle operazioni di aggregazione e di aggiornamento come $group, $match, $sort, $set, $inc, ecc.
+
+3-variabili di contesto come $$CURRENT, $$ROOT, $$DESCEND, $$PRUNE, ecc.
+
+in breve il segno del dollaro viene utilizzato pernellepipeline di aggregazione, per fare riferimento ai campi del documento stesso, 
+per specificare operatori di aggiornamento e per variabili di contesto.
+sono una parte cruciale della sintassi di MongoDB e vengono utilizzati in molte operazioni e funzionalità del database'''
