@@ -85,7 +85,7 @@ La fase 3 ($sort) ordina i risultati in base al conteggio in ordine discendente.
 Infine, il metodo aggregate() viene chiamato sulla collezione specificata collection e 
 viene restituito un cursore che può essere iterato per recuperare i risultati delle operazioni di aggregazione'''
 
-pi = [{'$group':{'_id': None,'avg_age':{'$avg':'$age'}}},
+pi = [{'$group':{'_id': None,'avg_age':{'$avg':'age'}}},
       {'$match':{'avg_age':{'$gt':25}}},
       {'$sort':{'avg_age':1}},
       {'$limit':1}]
@@ -97,7 +97,7 @@ db.close() #chiusura della connessione
 
 '''($$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$)
 1-il segno del dollaro($) serve per far riferimento anche ai campi del documento stesso,
-ad esempio per fare riferimento al campo "age" di un documento, possiamo usare "$age"
+ad esempio per fare riferimento al campo "age" di un documento
 
 2-nelle operazioni di aggregazione e di aggiornamento come $group, $match, $sort, $set, $inc, ecc.
 
